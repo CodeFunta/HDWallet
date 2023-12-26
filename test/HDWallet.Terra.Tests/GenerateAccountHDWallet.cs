@@ -1,6 +1,8 @@
 using HDWallet.Core;
 using HDWallet.Secp256k1;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
 
 namespace HDWallet.Terra.Test
 {
@@ -13,7 +15,7 @@ namespace HDWallet.Terra.Test
             IHDWallet<TerraWallet> wallet = new TerraHDWallet(words);
             var account0wallet0 = wallet.GetAccount(0).GetExternalWallet(0); // m/44'/330'/0'/0/0
             var t = account0wallet0.PublicKey.ToHex();
-            Assert.AreEqual("03ad19db6505046a49ff45e09b261794e34fb1ca384b668c29ef479d8c5bd56be7", account0wallet0.PublicKey.ToHex());
+            ClassicAssert.AreEqual("03ad19db6505046a49ff45e09b261794e34fb1ca384b668c29ef479d8c5bd56be7", account0wallet0.PublicKey.ToHex());
 
             // Account Extended Private Key for m/44'/330'/0';
             var accountExtendedPrivateKey = "xprv9zBJRUoZ6njdJGQsJYdm8WqfVahRchQ9aBWRvX2Xgdpf5cwpHN2PS3Zm3WxveWbuhGifm4gW7Cb5uTYFjCdcDduBJTanb2hAK2xjrvh73AX";
@@ -21,9 +23,9 @@ namespace HDWallet.Terra.Test
 
             // m/44'/330'/0'/0/0
             var depositWallet0 = account.GetExternalWallet(0);
-            Assert.AreEqual("03ad19db6505046a49ff45e09b261794e34fb1ca384b668c29ef479d8c5bd56be7", depositWallet0.PublicKey.ToHex());
+            ClassicAssert.AreEqual("03ad19db6505046a49ff45e09b261794e34fb1ca384b668c29ef479d8c5bd56be7", depositWallet0.PublicKey.ToHex());
 
-            Assert.AreEqual(account0wallet0.PublicKey, depositWallet0.PublicKey);
+            ClassicAssert.AreEqual(account0wallet0.PublicKey, depositWallet0.PublicKey);
         }
 
         [Test]
@@ -32,7 +34,7 @@ namespace HDWallet.Terra.Test
             var accountExtendedPrivateKey = "xprv9zBJRUoZ6njdJGQsJYdm8WqfVahRchQ9aBWRvX2Xgdpf5cwpHN2PS3Zm3WxveWbuhGifm4gW7Cb5uTYFjCdcDduBJTanb2hAK2xjrvh73AX";
             IAccount<TerraWallet> account = new Account<TerraWallet>(accountExtendedPrivateKey, NBitcoin.Network.Main);
             var depositWallet0 = account.GetExternalWallet(0);
-            Assert.AreEqual("03ad19db6505046a49ff45e09b261794e34fb1ca384b668c29ef479d8c5bd56be7", depositWallet0.PublicKey.ToHex());
+            ClassicAssert.AreEqual("03ad19db6505046a49ff45e09b261794e34fb1ca384b668c29ef479d8c5bd56be7", depositWallet0.PublicKey.ToHex());
         }
 
         [Test]

@@ -2,6 +2,8 @@ using HDWallet.Core;
 using NBitcoin;
 using NBitcoin.DataEncoders;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
 
 namespace HDWallet.Terra.Test
 {
@@ -24,7 +26,7 @@ namespace HDWallet.Terra.Test
             IAddressGenerator addressGenerator =  new AddressGenerator();
             var actualAddress = addressGenerator.GenerateAddress(key.PubKey.ToBytes());
 
-            Assert.AreEqual(address, actualAddress);
+            ClassicAssert.AreEqual(address, actualAddress);
         }
     }
 }

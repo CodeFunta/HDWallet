@@ -6,6 +6,8 @@ using NBitcoin;
 using NBitcoin.Crypto;
 using NBitcoin.DataEncoders;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
 
 namespace HDWallet.Secp256k1.Tests.Signature
 {
@@ -30,10 +32,10 @@ namespace HDWallet.Secp256k1.Tests.Signature
             var compactSignature = wallet.Sign(Encoders.Hex.DecodeData(message)).ToCompact();
 
             var isParsed = ECDSASignature.TryParseFromCompact(compactSignature, out ECDSASignature ecdsaSignature);
-            Assert.IsTrue(isParsed);
+            ClassicAssert.IsTrue(isParsed);
 
             var derSignature = ecdsaSignature.ToDER().ToHexString();
-            Assert.AreEqual(expected: signatureDER, actual: derSignature);
+            ClassicAssert.AreEqual(expected: signatureDER, actual: derSignature);
         }
 
 
@@ -50,10 +52,10 @@ namespace HDWallet.Secp256k1.Tests.Signature
             SampleSecp256k1Wallet wallet = new SampleSecp256k1Wallet("79afbf7147841fca72b45a1978dd7669470ba67abbe5c220062924380c9c364b");
             Secp256k1Signature signature = wallet.Sign(Encoders.Hex.DecodeData(message));
 
-            var isParsed = signature.TryGetECDSASignature(out ECDSASignature ecdsaSignature); Assert.IsTrue(isParsed);
+            var isParsed = signature.TryGetECDSASignature(out ECDSASignature ecdsaSignature); ClassicAssert.IsTrue(isParsed);
 
             var derSignature = ecdsaSignature.ToDER().ToHexString();
-            Assert.AreEqual(expected: signatureDER, actual: derSignature);
+            ClassicAssert.AreEqual(expected: signatureDER, actual: derSignature);
         }
 
         // [TestCase("b80553c039bb8bac7414673b7eb5d9f6bb931572afb0618e141bc87b3906000e")]
@@ -75,11 +77,11 @@ namespace HDWallet.Secp256k1.Tests.Signature
         //     var compactSignature = signature.ToCompact();
 
         //     var isParsed = ECDSASignature.TryParseFromCompact(compactSignature, out ECDSASignature ecdsaSignature);
-        //     Assert.IsTrue(isParsed);
+        //     ClassicAssert.IsTrue(isParsed);
 
         //     Key PrivateKey = Key.Parse(wif, Network.Main); 
         //     var isVerified = PrivateKey.PubKey.Verify(new uint256(messageHash), ecdsaSignature);
-        //     Assert.IsTrue(isVerified);
+        //     ClassicAssert.IsTrue(isVerified);
         // }
 
         // [Test]
@@ -98,9 +100,9 @@ namespace HDWallet.Secp256k1.Tests.Signature
         //     var R = r.ToBytes().ToHexString();
         //     var S = s.ToBytes().ToHexString();
 
-        //     Assert.AreEqual("84de8230e66c6507dea6de6d925c76ac0db85d99ddd3c069659d0970ade8876a", R);
-        //     Assert.AreEqual("0dcd4adb2e40fcf257da419b88c1e7dd4d92750b63381d8379b96f3b7b8a4498", S);
-        //     Assert.AreEqual(1, v);
+        //     ClassicAssert.AreEqual("84de8230e66c6507dea6de6d925c76ac0db85d99ddd3c069659d0970ade8876a", R);
+        //     ClassicAssert.AreEqual("0dcd4adb2e40fcf257da419b88c1e7dd4d92750b63381d8379b96f3b7b8a4498", S);
+        //     ClassicAssert.AreEqual(1, v);
         // }
 
         // [Test]
@@ -108,7 +110,7 @@ namespace HDWallet.Secp256k1.Tests.Signature
         // {
             // var privKeyStr = Encoders.Hex.DecodeData("8e812436a0e3323166e1f0e8ba79e19e217b2c4a53c970d4cca0cfb1078979df"); 
             // Key key = new Key(privKeyStr);
-            // Assert.AreEqual("04a5bb3b28466f578e6e93fbfd5f75cee1ae86033aa4bbea690e3312c087181eb366f9a1d1d6a437a9bf9fc65ec853b9fd60fa322be3997c47144eb20da658b3d1", key.PubKey.Decompress().ToHex());
+            // ClassicAssert.AreEqual("04a5bb3b28466f578e6e93fbfd5f75cee1ae86033aa4bbea690e3312c087181eb366f9a1d1d6a437a9bf9fc65ec853b9fd60fa322be3997c47144eb20da658b3d1", key.PubKey.Decompress().ToHex());
 
             // var messageToSign = "159817a085f113d099d3d93c051410e9bfe043cc5c20e43aa9a083bf73660145";
             // var messageBytes = Encoders.Hex.DecodeData(messageToSign);
@@ -120,8 +122,8 @@ namespace HDWallet.Secp256k1.Tests.Signature
             // var R = r.ToBytes();
             // var S = s.ToBytes();
 
-            // Assert.AreEqual("38b7dac5ee932ac1bf2bc62c05b792cd93c3b4af61dc02dbb4b93dacb758123f", R.ToHexString());
-            // Assert.AreEqual("08bf123eabe77480787d664ca280dc1f20d9205725320658c39c6c143fd5642d", S.ToHexString());
+            // ClassicAssert.AreEqual("38b7dac5ee932ac1bf2bc62c05b792cd93c3b4af61dc02dbb4b93dacb758123f", R.ToHexString());
+            // ClassicAssert.AreEqual("08bf123eabe77480787d664ca280dc1f20d9205725320658c39c6c143fd5642d", S.ToHexString());
 
             // Compact signature
             // CompactSignature signatureCompact = key.SignCompact(new uint256(messageBytes), true);
@@ -137,19 +139,19 @@ namespace HDWallet.Secp256k1.Tests.Signature
             // // V from comapct signature
             // var (r1, s1, v1) = sigR;
 
-            // Assert.AreEqual(v1, 0);
+            // ClassicAssert.AreEqual(v1, 0);
 
             // // Recoverable signature with Secp256k1 lib
             // NBitcoin.Secp256k1.ECPrivKey privKey = Context.Instance.CreateECPrivKey(new Scalar(key.ToBytes()));
-            // Assert.AreEqual(key.PubKey.ToBytes(), privKey.CreatePubKey().ToBytes());
+            // ClassicAssert.AreEqual(key.PubKey.ToBytes(), privKey.CreatePubKey().ToBytes());
 
             // privKey.TrySignRecoverable(messageBytes, out SecpRecoverableECDSASignature sigRec);
 
             // var (r2, s2, v2) = sigRec;
 
-            // Assert.AreEqual(r2, r);
-            // Assert.AreEqual(s2, s);
-            // Assert.AreEqual(v2, v1);
+            // ClassicAssert.AreEqual(r2, r);
+            // ClassicAssert.AreEqual(s2, s);
+            // ClassicAssert.AreEqual(v2, v1);
         // }
     }
 

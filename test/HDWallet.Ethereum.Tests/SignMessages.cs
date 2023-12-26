@@ -6,6 +6,9 @@ using NBitcoin.DataEncoders;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.Signer;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
+using NUnit.Framework.Legacy;
 using System;
 using System.Text;
 
@@ -28,7 +31,7 @@ namespace HDWallet.Ethereum.Tests
             EthereumWallet wallet = new EthereumWallet(privateKey);
             EthereumSignature walletSig = wallet.Sign(sha256);
             var signatureWithHdWallet = walletSig.SignatureHex; 
-            Assert.AreEqual(signatureWithHdWallet, "0x7de4f9175ba7cebc11db681ff5e1dd43de8f3fbca3744f743223b0681b4ee60e2e9a181cd6456762a178841f2a133e8db073f8b7880ae33fe016b8fd6d9758131c");   
+            ClassicAssert.AreEqual(signatureWithHdWallet, "0x7de4f9175ba7cebc11db681ff5e1dd43de8f3fbca3744f743223b0681b4ee60e2e9a181cd6456762a178841f2a133e8db073f8b7880ae33fe016b8fd6d9758131c");   
         }
 
         [Test]
@@ -42,7 +45,7 @@ namespace HDWallet.Ethereum.Tests
             EthereumWallet wallet = hdWallet.GetAccount(0).GetExternalWallet(0);
 
             var signatureWithHdWallet = wallet.Sign(sha256).SignatureHex;
-            Assert.AreEqual("0x605f721301fe2e817f639babacfa91855254d1e5ba0ff5d93ba19ae30f599eb735c0d9f4e42824da188718c278e9ccd8fdd40068e6051ebf06a69590a8db9d511b", signatureWithHdWallet);
+            ClassicAssert.AreEqual("0x605f721301fe2e817f639babacfa91855254d1e5ba0ff5d93ba19ae30f599eb735c0d9f4e42824da188718c278e9ccd8fdd40068e6051ebf06a69590a8db9d511b", signatureWithHdWallet);
         }
 
         [Test]
@@ -60,27 +63,27 @@ namespace HDWallet.Ethereum.Tests
 
             // Verify with HdWallet
             var isVerified = wallet.Verify(sha256, signature);
-            Assert.IsTrue(isVerified);
+            ClassicAssert.IsTrue(isVerified);
 
             // Verify with Nethereum
             var key = new EthECKey(wallet.PrivateKeyBytes, isPrivate: true);
             var signatureFromComp = EthECDSASignatureFactory.FromComponents(signature.R, signature.S);
             isVerified = key.Verify(sha256, signatureFromComp);
-            Assert.True(isVerified);
+            ClassicAssert.True(isVerified);
 
             // Verify with Pubkey using Nethererum
             var pubKey = new EthECKey(wallet.PublicKeyBytes, isPrivate: false);
             isVerified = pubKey.Verify(sha256, signatureFromComp);
-            Assert.True(isVerified);
+            ClassicAssert.True(isVerified);
 
             // Verify with NBitcoin pubkey
             PubKey.TryCreatePubKey(wallet.PublicKeyBytes, out PubKey nBitcoinPubKey);
 
             var isParsed = new EthereumSignature(signature).TryGetECDSASignature(out ECDSASignature ecdsaSignature);
-            Assert.IsTrue(isParsed);
+            ClassicAssert.IsTrue(isParsed);
 
             isVerified = nBitcoinPubKey.Verify(new uint256(sha256), ecdsaSignature);
-            Assert.True(isVerified);
+            ClassicAssert.True(isVerified);
         }
 
         [Test]
@@ -99,7 +102,7 @@ namespace HDWallet.Ethereum.Tests
             // Verify with Nethereum
             var privKey = new EthECKey(wallet.PrivateKeyBytes, isPrivate: true);
             var isVerified = privKey.Verify(sha256, EthECDSASignatureFactory.FromComponents(signature.R, signature.S));
-            Assert.True(isVerified);
+            ClassicAssert.True(isVerified);
         }
 
         [Test]
@@ -119,7 +122,7 @@ namespace HDWallet.Ethereum.Tests
             // Verify with Pubkey using Nethererum
             var pubKey = new EthECKey(wallet.PublicKey.ToBytes(), isPrivate: false);
             var isVerified = pubKey.Verify(sha256, signatureFromComp);
-            Assert.True(isVerified);
+            ClassicAssert.True(isVerified);
         }
 
         [Test]
@@ -139,10 +142,10 @@ namespace HDWallet.Ethereum.Tests
             var nBitcoinPubKey = wallet.PublicKey;
 
             var isParsed = signature.TryGetECDSASignature(out ECDSASignature ecdsaSignature);
-            Assert.IsTrue(isParsed);
+            ClassicAssert.IsTrue(isParsed);
 
             var isVerified = nBitcoinPubKey.Verify(new uint256(sha256), ecdsaSignature);
-            Assert.True(isVerified);
+            ClassicAssert.True(isVerified);
         }
 
         [Test]
@@ -163,7 +166,7 @@ namespace HDWallet.Ethereum.Tests
             // Sign with HdWallet.Ethereum
             EthereumWallet wallet = new EthereumWallet(privateKey);
             var signatureWithHdWallet = wallet.Sign(sha256).SignatureHex;
-            Assert.AreEqual(signatureWithNeth, signatureWithHdWallet);
+            ClassicAssert.AreEqual(signatureWithNeth, signatureWithHdWallet);
         }
 
         [Test]
@@ -179,35 +182,35 @@ namespace HDWallet.Ethereum.Tests
             // Sign with Nethereum
             var ethereumSigner = new MessageSigner();
             EthECDSASignature ethCompactSignature = ethereumSigner.SignAndCalculateV(sha256, privateKey);
-            var r = ethCompactSignature.R.ToHex().PadLeft(64, '0'); Assert.AreEqual(r, "7de4f9175ba7cebc11db681ff5e1dd43de8f3fbca3744f743223b0681b4ee60e");
-            var s = ethCompactSignature.S.ToHex().PadLeft(64, '0'); Assert.AreEqual(s, "2e9a181cd6456762a178841f2a133e8db073f8b7880ae33fe016b8fd6d975813");
-            var v = ethCompactSignature.V.ToHex(); Assert.AreEqual(v, "1c");
+            var r = ethCompactSignature.R.ToHex().PadLeft(64, '0'); ClassicAssert.AreEqual(r, "7de4f9175ba7cebc11db681ff5e1dd43de8f3fbca3744f743223b0681b4ee60e");
+            var s = ethCompactSignature.S.ToHex().PadLeft(64, '0'); ClassicAssert.AreEqual(s, "2e9a181cd6456762a178841f2a133e8db073f8b7880ae33fe016b8fd6d975813");
+            var v = ethCompactSignature.V.ToHex(); ClassicAssert.AreEqual(v, "1c");
 
             string signatureWithNeth = EthECDSASignature.CreateStringSignature(ethCompactSignature); 
-            Assert.AreEqual(signatureWithNeth, "0x7de4f9175ba7cebc11db681ff5e1dd43de8f3fbca3744f743223b0681b4ee60e2e9a181cd6456762a178841f2a133e8db073f8b7880ae33fe016b8fd6d9758131c");
+            ClassicAssert.AreEqual(signatureWithNeth, "0x7de4f9175ba7cebc11db681ff5e1dd43de8f3fbca3744f743223b0681b4ee60e2e9a181cd6456762a178841f2a133e8db073f8b7880ae33fe016b8fd6d9758131c");
 
             // Sign with NBitcoin
             Key key = PrivateKeyParse(privateKey);
             var nbitcoinSignature = key.Sign(new uint256(sha256));
-            Assert.AreEqual(nbitcoinSignature.ToCompact().ToHexString(), "7de4f9175ba7cebc11db681ff5e1dd43de8f3fbca3744f743223b0681b4ee60e2e9a181cd6456762a178841f2a133e8db073f8b7880ae33fe016b8fd6d975813");
+            ClassicAssert.AreEqual(nbitcoinSignature.ToCompact().ToHexString(), "7de4f9175ba7cebc11db681ff5e1dd43de8f3fbca3744f743223b0681b4ee60e2e9a181cd6456762a178841f2a133e8db073f8b7880ae33fe016b8fd6d975813");
 
             CompactSignature nbitcoinCompactSignature = key.SignCompact(new uint256(sha256));
             var compactSignature = nbitcoinCompactSignature.Signature.ToHex(); 
-            Assert.AreEqual(compactSignature, "7de4f9175ba7cebc11db681ff5e1dd43de8f3fbca3744f743223b0681b4ee60e2e9a181cd6456762a178841f2a133e8db073f8b7880ae33fe016b8fd6d975813");
+            ClassicAssert.AreEqual(compactSignature, "7de4f9175ba7cebc11db681ff5e1dd43de8f3fbca3744f743223b0681b4ee60e2e9a181cd6456762a178841f2a133e8db073f8b7880ae33fe016b8fd6d975813");
             var recId = nbitcoinCompactSignature.RecoveryId;
-            Assert.AreEqual(recId, 1);
+            ClassicAssert.AreEqual(recId, 1);
 
             var signatureWithNBitcoin = "0x" + compactSignature + new[] {(byte) (recId + 27)}.ToHex();
-            Assert.AreEqual(signatureWithNBitcoin, "0x7de4f9175ba7cebc11db681ff5e1dd43de8f3fbca3744f743223b0681b4ee60e2e9a181cd6456762a178841f2a133e8db073f8b7880ae33fe016b8fd6d9758131c");
+            ClassicAssert.AreEqual(signatureWithNBitcoin, "0x7de4f9175ba7cebc11db681ff5e1dd43de8f3fbca3744f743223b0681b4ee60e2e9a181cd6456762a178841f2a133e8db073f8b7880ae33fe016b8fd6d9758131c");
 
             // Sign with HdWallet.Ethereum
             EthereumWallet wallet = new EthereumWallet(privateKey);
             EthereumSignature walletSig = wallet.Sign(sha256);
             var signatureWithHdWallet = walletSig.SignatureHex; 
-            Assert.AreEqual(signatureWithHdWallet, "0x7de4f9175ba7cebc11db681ff5e1dd43de8f3fbca3744f743223b0681b4ee60e2e9a181cd6456762a178841f2a133e8db073f8b7880ae33fe016b8fd6d9758131c");
+            ClassicAssert.AreEqual(signatureWithHdWallet, "0x7de4f9175ba7cebc11db681ff5e1dd43de8f3fbca3744f743223b0681b4ee60e2e9a181cd6456762a178841f2a133e8db073f8b7880ae33fe016b8fd6d9758131c");
 
-            Assert.AreEqual(signatureWithHdWallet, signatureWithNBitcoin);
-            Assert.AreEqual(signatureWithHdWallet, signatureWithNeth);
+            ClassicAssert.AreEqual(signatureWithHdWallet, signatureWithNBitcoin);
+            ClassicAssert.AreEqual(signatureWithHdWallet, signatureWithNeth);
         }
 
         private Key PrivateKeyParse(string privateKey)

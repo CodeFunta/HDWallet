@@ -3,6 +3,7 @@ using HDWallet.BIP32.Ed25519;
 using HDWallet.Core;
 using HDWallet.Ed25519.Sample;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HDWallet.Ed25519.Tests
 {
@@ -21,7 +22,7 @@ namespace HDWallet.Ed25519.Tests
         {
             IAccount<SampleWallet> accountFromSeed = new Account<SampleWallet>(new ExtKey(seed));
             IAccount<SampleWallet> accountFromWif = new Account<SampleWallet>(accountMasterKey: rootKEy);
-            Assert.AreEqual(accountFromSeed.GetInternalWallet(0).PublicKeyBytes, accountFromWif.GetInternalWallet(0).PublicKeyBytes);
+            ClassicAssert.AreEqual(accountFromSeed.GetInternalWallet(0).PublicKeyBytes, accountFromWif.GetInternalWallet(0).PublicKeyBytes);
         }
 
         // mno -> m/0/354/0/0/0 -> public1
@@ -36,7 +37,7 @@ namespace HDWallet.Ed25519.Tests
 
             // HD Wallet from mnemonic
             IHDWallet<SampleWallet> testHDWalletEd25519 = new TestHDWalletEd25519(mnemonic: mnemonic, "");
-            Assert.AreEqual(((TestHDWalletEd25519)testHDWalletEd25519).BIP39Seed, seed);
+            ClassicAssert.AreEqual(((TestHDWalletEd25519)testHDWalletEd25519).BIP39Seed, seed);
 
             // Wallet m/0/354/0/0/0
             var expectedExternal0 = testHDWalletEd25519.GetAccount(0).GetExternalWallet(0); 
@@ -47,18 +48,18 @@ namespace HDWallet.Ed25519.Tests
 
             // Wallet m/0/354/0/0/0
             var actualExternal0 = actualAccount0.GetExternalWallet(0); // m/0/354/0/0/0
-            Assert.AreEqual(expectedExternal0.PublicKeyBytes, actualExternal0.PublicKeyBytes);
+            ClassicAssert.AreEqual(expectedExternal0.PublicKeyBytes, actualExternal0.PublicKeyBytes);
 
             // xprv for m/0/354/0
             string actualAccount0ExtKeyWif = actualAccount0ExtKey.GetWif();
-            Assert.AreEqual(xprv_m_0_354_0, actualAccount0ExtKeyWif);
+            ClassicAssert.AreEqual(xprv_m_0_354_0, actualAccount0ExtKeyWif);
 
             // Account m/0/354/0 from xprv
             IAccount<SampleWallet> actualAccount0FromWif = new Account<SampleWallet>(xprv_m_0_354_0);
             
             // Wallet m/0/354/0/0/0 from xprv
             var actualExternal0FromWof = actualAccount0FromWif.GetExternalWallet(0); 
-            Assert.AreEqual(expectedExternal0.PublicKeyBytes, actualExternal0FromWof.PublicKeyBytes);
+            ClassicAssert.AreEqual(expectedExternal0.PublicKeyBytes, actualExternal0FromWof.PublicKeyBytes);
         }
     }
 }

@@ -1,6 +1,7 @@
 using HDWallet.Core;
 using HDWallet.Ed25519.Sample;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HDWallet.Ed25519.Tests
 {
@@ -14,8 +15,8 @@ namespace HDWallet.Ed25519.Tests
             IHDWallet<CardanoSampleWallet> hdWallet = new PathTestHDWalletEd25519(ReferenceSeed);
             var masterWallet = hdWallet.GetMasterWallet();
 
-            Assert.AreEqual(privateKey, masterWallet.PrivateKeyBytes.ToHexString());
-            Assert.AreEqual(publicKey, $"00{masterWallet.PublicKeyBytes.ToHexString()}");
+            ClassicAssert.AreEqual(privateKey, masterWallet.PrivateKeyBytes.ToHexString());
+            ClassicAssert.AreEqual(publicKey, $"00{masterWallet.PublicKeyBytes.ToHexString()}");
         }
 
         [TestCase("92a5b23c0b8a99e37d07df3fb9966917f5d06e02ddbd909c7e184371463e9fc9", "00ae98736566d30ed0e9d2f4486a64bc95740d89c7db33f52121f8ea8f76ff0fc1")]
@@ -24,8 +25,8 @@ namespace HDWallet.Ed25519.Tests
             IHDWallet<CardanoSampleWallet> hdWallet = new PathTestHDWalletEd25519(ReferenceSeed);
             var accountWallet = hdWallet.GetAccountWallet(2);
 
-            Assert.AreEqual(privateKey, accountWallet.PrivateKeyBytes.ToHexString());
-            Assert.AreEqual(publicKey, $"00{accountWallet.PublicKeyBytes.ToHexString()}");
+            ClassicAssert.AreEqual(privateKey, accountWallet.PrivateKeyBytes.ToHexString());
+            ClassicAssert.AreEqual(publicKey, $"00{accountWallet.PublicKeyBytes.ToHexString()}");
         }
     }
 }

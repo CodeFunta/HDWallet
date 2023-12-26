@@ -1,4 +1,6 @@
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
 using System;
 using NBitcoin.DataEncoders;
 using Nethereum.Util;
@@ -31,23 +33,23 @@ namespace HDWallet.Tron.Tests
             PubKey pubKey = privKey.PubKey;
 
             var pubKeyUncomp = pubKey.Decompress().ToBytes().Skip(1).ToArray(); // Skip version byte
-            Assert.AreEqual(
+            ClassicAssert.AreEqual(
                 "ee63599802b5d31a29c95cc7df04f427e8f0a124bed9333f3a80404acfc3127659c540d0162dedb81ac5f74b2deb4962656efe112b252e54ac3ba1207cd1fb10",
                 Encoders.Hex.EncodeData(pubKeyUncomp)
             );
 
             var pubKeyHash = new Sha3Keccack().CalculateHash(pubKeyUncomp);
-            Assert.AreEqual("0837725ba59e30e8e52ba5ab95679f3aaf5211991781d49b30525dddfe9a18de", pubKeyHash.ToHexString());
+            ClassicAssert.AreEqual("0837725ba59e30e8e52ba5ab95679f3aaf5211991781d49b30525dddfe9a18de", pubKeyHash.ToHexString());
 
             var sha3HashBytes = new byte[20];
             Array.Copy(pubKeyHash, pubKeyHash.Length - 20, sha3HashBytes, 0, 20);
 
             byte[] PKHWithVersionBytes = Helper.Concat(new byte[] { 65 }, sha3HashBytes);
             var hexAddress = PKHWithVersionBytes.ToHexString();
-            Assert.AreEqual("4195679F3AAF5211991781D49B30525DDDFE9A18DE".ToLower(), hexAddress);
+            ClassicAssert.AreEqual("4195679F3AAF5211991781D49B30525DDDFE9A18DE".ToLower(), hexAddress);
             
             var result = Encoders.Base58Check.EncodeData(PKHWithVersionBytes); 
-            Assert.AreEqual(
+            ClassicAssert.AreEqual(
                 "TPbBpRXnt6ztse8XkCLiJstZyqQZvxW2sx",
                 result
             );

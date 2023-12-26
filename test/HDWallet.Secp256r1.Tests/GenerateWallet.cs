@@ -5,6 +5,8 @@ using Neo;
 using Neo.SmartContract;
 using Neo.Wallets;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
 
 namespace HDWallet.Secp256r1.Tests
 {
@@ -45,7 +47,7 @@ namespace HDWallet.Secp256r1.Tests
              KeyPair keyPair = new KeyPair(privateKey);
              var pubKey = keyPair.PublicKey.ToString();
 
-             Assert.AreEqual(pubKeyStr, pubKey);
+             ClassicAssert.AreEqual(pubKeyStr, pubKey);
         }
     }
 }

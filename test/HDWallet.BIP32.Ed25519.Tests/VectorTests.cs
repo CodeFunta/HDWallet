@@ -17,6 +17,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using HDWallet.BIP32.Ed25519;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HDWallet.BIP32.Ed25519.Tests
 {
@@ -64,15 +65,15 @@ namespace HDWallet.BIP32.Ed25519.Tests
             const string expectedPublicKey = "008c8a13df77a28f3445213a0f432fde644acaa215fc72dcdf300d5efaa85d350c";
 
             var testMasterKeyFromSeed = TestMasterKeyFromSeed(Vector1Seed);
-            Assert.AreEqual(Vector1KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
-            Assert.AreEqual(Vector1ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(Vector1KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
+            ClassicAssert.AreEqual(Vector1ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
 
             var testDerivePath = TestDerivePath(expectedPath, Vector1Seed);
-            Assert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
-            Assert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
+            ClassicAssert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
 
             var testPublicKey = TestGetPublicKey(testDerivePath.Key);
-            Assert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
+            ClassicAssert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
         }
 
         [Test]
@@ -84,15 +85,15 @@ namespace HDWallet.BIP32.Ed25519.Tests
             const string expectedPublicKey = "001932a5270f335bed617d5b935c80aedb1a35bd9fc1e31acafd5372c30f5c1187";
 
             var testMasterKeyFromSeed = TestMasterKeyFromSeed(Vector1Seed);
-            Assert.AreEqual(Vector1KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
-            Assert.AreEqual(Vector1ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(Vector1KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
+            ClassicAssert.AreEqual(Vector1ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
 
             var testDerivePath = TestDerivePath(expectedPath, Vector1Seed);
-            Assert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
-            Assert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
+            ClassicAssert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
 
             var testPublicKey = TestGetPublicKey(testDerivePath.Key);
-            Assert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
+            ClassicAssert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
         }
 
         [Test]
@@ -104,15 +105,15 @@ namespace HDWallet.BIP32.Ed25519.Tests
             const string expectedPublicKey = "00ae98736566d30ed0e9d2f4486a64bc95740d89c7db33f52121f8ea8f76ff0fc1";
 
             var testMasterKeyFromSeed = TestMasterKeyFromSeed(Vector1Seed);
-            Assert.AreEqual(Vector1KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
-            Assert.AreEqual(Vector1ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(Vector1KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
+            ClassicAssert.AreEqual(Vector1ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
 
             var testDerivePath = TestDerivePath(expectedPath, Vector1Seed);
-            Assert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
-            Assert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
+            ClassicAssert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
 
             var testPublicKey = TestGetPublicKey(testDerivePath.Key);
-            Assert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
+            ClassicAssert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
         }
 
         [Test]
@@ -124,15 +125,15 @@ namespace HDWallet.BIP32.Ed25519.Tests
             const string expectedPublicKey = "008abae2d66361c879b900d204ad2cc4984fa2aa344dd7ddc46007329ac76c429c";
 
             var testMasterKeyFromSeed = TestMasterKeyFromSeed(Vector1Seed);
-            Assert.AreEqual(Vector1KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
-            Assert.AreEqual(Vector1ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(Vector1KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
+            ClassicAssert.AreEqual(Vector1ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
 
             var testDerivePath = TestDerivePath(expectedPath, Vector1Seed);
-            Assert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
-            Assert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
+            ClassicAssert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
 
             var testPublicKey = TestGetPublicKey(testDerivePath.Key);
-            Assert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
+            ClassicAssert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
         }
 
         [Test]
@@ -144,15 +145,15 @@ namespace HDWallet.BIP32.Ed25519.Tests
             const string expectedPublicKey = "003c24da049451555d51a7014a37337aa4e12d41e485abccfa46b47dfb2af54b7a";
 
             var testMasterKeyFromSeed = TestMasterKeyFromSeed(Vector1Seed);
-            Assert.AreEqual(Vector1KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
-            Assert.AreEqual(Vector1ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(Vector1KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
+            ClassicAssert.AreEqual(Vector1ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
 
             var testDerivePath = TestDerivePath(expectedPath, Vector1Seed);
-            Assert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
-            Assert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
+            ClassicAssert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
 
             var testPublicKey = TestGetPublicKey(testDerivePath.Key);
-            Assert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
+            ClassicAssert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
         }
 
         [Test]
@@ -164,15 +165,15 @@ namespace HDWallet.BIP32.Ed25519.Tests
             const string expectedPublicKey = "0086fab68dcb57aa196c77c5f264f215a112c22a912c10d123b0d03c3c28ef1037";
 
             var testMasterKeyFromSeed = TestMasterKeyFromSeed(Vector2Seed);
-            Assert.AreEqual(Vector2KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
-            Assert.AreEqual(Vector2ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(Vector2KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
+            ClassicAssert.AreEqual(Vector2ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
 
             var testDerivePath = TestDerivePath(expectedPath, Vector2Seed);
-            Assert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
-            Assert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
+            ClassicAssert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
 
             var testPublicKey = TestGetPublicKey(testDerivePath.Key);
-            Assert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
+            ClassicAssert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
         }
 
         [Test]
@@ -184,15 +185,15 @@ namespace HDWallet.BIP32.Ed25519.Tests
             const string expectedPublicKey = "005ba3b9ac6e90e83effcd25ac4e58a1365a9e35a3d3ae5eb07b9e4d90bcf7506d";
 
             var testMasterKeyFromSeed = TestMasterKeyFromSeed(Vector2Seed);
-            Assert.AreEqual(Vector2KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
-            Assert.AreEqual(Vector2ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(Vector2KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
+            ClassicAssert.AreEqual(Vector2ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
 
             var testDerivePath = TestDerivePath(expectedPath, Vector2Seed);
-            Assert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
-            Assert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
+            ClassicAssert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
 
             var testPublicKey = TestGetPublicKey(testDerivePath.Key);
-            Assert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
+            ClassicAssert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
         }
 
         [Test]
@@ -204,15 +205,15 @@ namespace HDWallet.BIP32.Ed25519.Tests
             const string expectedPublicKey = "002e66aa57069c86cc18249aecf5cb5a9cebbfd6fadeab056254763874a9352b45";
 
             var testMasterKeyFromSeed = TestMasterKeyFromSeed(Vector2Seed);
-            Assert.AreEqual(Vector2KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
-            Assert.AreEqual(Vector2ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(Vector2KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
+            ClassicAssert.AreEqual(Vector2ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
 
             var testDerivePath = TestDerivePath(expectedPath, Vector2Seed);
-            Assert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
-            Assert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
+            ClassicAssert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
 
             var testPublicKey = TestGetPublicKey(testDerivePath.Key);
-            Assert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
+            ClassicAssert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
         }
 
         [Test]
@@ -224,15 +225,15 @@ namespace HDWallet.BIP32.Ed25519.Tests
             const string expectedPublicKey = "00e33c0f7d81d843c572275f287498e8d408654fdf0d1e065b84e2e6f157aab09b";
 
             var testMasterKeyFromSeed = TestMasterKeyFromSeed(Vector2Seed);
-            Assert.AreEqual(Vector2KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
-            Assert.AreEqual(Vector2ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(Vector2KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
+            ClassicAssert.AreEqual(Vector2ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
 
             var testDerivePath = TestDerivePath(expectedPath, Vector2Seed);
-            Assert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
-            Assert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
+            ClassicAssert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
 
             var testPublicKey = TestGetPublicKey(testDerivePath.Key);
-            Assert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
+            ClassicAssert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
         }
 
 
@@ -245,15 +246,15 @@ namespace HDWallet.BIP32.Ed25519.Tests
             const string expectedPublicKey = "0047150c75db263559a70d5778bf36abbab30fb061ad69f69ece61a72b0cfa4fc0";
 
             var testMasterKeyFromSeed = TestMasterKeyFromSeed(Vector2Seed);
-            Assert.AreEqual(Vector2KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
-            Assert.AreEqual(Vector2ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(Vector2KeyHexExpected, testMasterKeyFromSeed.Key.ToStringHex());
+            ClassicAssert.AreEqual(Vector2ChainCodeExpected, testMasterKeyFromSeed.ChainCode.ToStringHex());
 
             var testDerivePath = TestDerivePath(expectedPath, Vector2Seed);
-            Assert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
-            Assert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(expectedKey, testDerivePath.Key.ToStringHex());
+            ClassicAssert.AreEqual(expectedChainCode, testDerivePath.ChainCode.ToStringHex());
 
             var testPublicKey = TestGetPublicKey(testDerivePath.Key);
-            Assert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
+            ClassicAssert.AreEqual(expectedPublicKey, testPublicKey.ToStringHex());
         }
     }
 }

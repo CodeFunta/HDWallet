@@ -1,4 +1,6 @@
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
 using HDWallet.Core;
 using NBitcoin;
 using System.Text;
@@ -21,14 +23,14 @@ namespace HDWallet.Tron.Tests.TronSignatureTests
             Signature signature = wallet0.Sign(txId);
             TronSignature tronSignature = new TronSignature(signature);
             // var signatureHex = Helper.ToHexString(tronSignature.SignatureBytes);
-            // Assert.AreEqual("f6e6fed529ebca249dbe2a98e53e8f6fec3fe459e6c9dff86c74ef109d2a6cff3a2d031ba5c04277b75d243e702b2522b831aabe2fa7e1e8de2a705bcdb7fd5d00000000", signatureHex);
+            // ClassicAssert.AreEqual("f6e6fed529ebca249dbe2a98e53e8f6fec3fe459e6c9dff86c74ef109d2a6cff3a2d031ba5c04277b75d243e702b2522b831aabe2fa7e1e8de2a705bcdb7fd5d00000000", signatureHex);
 
             // Create ECDSASignature from bytes of compact signature
             var isParsed = ECDSASignature.TryParseFromCompact(tronSignature.ToCompact(), out ECDSASignature parsedSignature);
-            Assert.IsTrue(isParsed);
+            ClassicAssert.IsTrue(isParsed);
 
             var isVerified = wallet0.PublicKey.Verify(new uint256(txId), parsedSignature);
-            Assert.IsTrue(isVerified);
+            ClassicAssert.IsTrue(isVerified);
         }
     }
 }

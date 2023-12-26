@@ -17,6 +17,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using HDWallet.BIP32.Ed25519;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HDWallet.BIP32.Ed25519.Tests
 {
@@ -32,7 +33,7 @@ namespace HDWallet.BIP32.Ed25519.Tests
         {
             ExtKey testMasterKeyFromSeed = new ExtKey(seed);
             string xprv = testMasterKeyFromSeed.GetWif(NBitcoin.Network.Main);
-            Assert.AreEqual(expected: wifExpected, actual: xprv);
+            ClassicAssert.AreEqual(expected: wifExpected, actual: xprv);
         }
 
         [TestCase(
@@ -46,8 +47,8 @@ namespace HDWallet.BIP32.Ed25519.Tests
         public void ShouldCreateFromWif(string wif, string keyHexExpected, string chainCodeExpected)
         {
             ExtKey testMasterKeyFromWif = ExtKey.CreateFromWif(wif);
-            Assert.AreEqual(keyHexExpected, testMasterKeyFromWif.Key.PrivateKey.ToStringHex());
-            Assert.AreEqual(chainCodeExpected, testMasterKeyFromWif.ChainCode.ToStringHex());
+            ClassicAssert.AreEqual(keyHexExpected, testMasterKeyFromWif.Key.PrivateKey.ToStringHex());
+            ClassicAssert.AreEqual(chainCodeExpected, testMasterKeyFromWif.ChainCode.ToStringHex());
         }
     }
 }

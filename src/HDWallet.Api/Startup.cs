@@ -15,39 +15,42 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using Microsoft.Extensions.PlatformAbstractions;
 using HDWallet.Polkadot;
 using HDWallet.FileCoin;
 using HDWallet.Ed25519;
 using HDWallet.Bitcoin;
+using Asp.Versioning.ApiExplorer;
 
 namespace HDWallet.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             Configuration = configuration;
+            WebHostEnvironment = webHostEnvironment;
         }
 
         private IConfiguration Configuration { get; }
+        private IWebHostEnvironment WebHostEnvironment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddJsonOptions(options => {
-                options.JsonSerializerOptions.IgnoreNullValues = true;
+                options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
             });
             services.AddApiVersioning(opt =>
             {
                 opt.ReportApiVersions = true;
                 opt.AssumeDefaultVersionWhenUnspecified = true;
-                opt.DefaultApiVersion = ApiVersion.Default;
+                opt.DefaultApiVersion = Asp.Versioning.ApiVersion.Default;
             });
-            services.AddVersionedApiExplorer(options =>  
-            {
-                options.GroupNameFormat = "'v'VVV";
-                options.SubstituteApiVersionInUrl = true;  
-            });  
+            services.AddEndpointsApiExplorer();
+            //services.AddVersionedApiExplorer(options =>  
+            //{
+            //    options.GroupNameFormat = "'v'VVV";
+            //    options.SubstituteApiVersionInUrl = true;  
+            //});  
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
             services.AddSwaggerGen(
                 options =>
@@ -137,11 +140,11 @@ namespace HDWallet.Api
             return settings;
         }
 
-        static string XmlCommentsFilePath
+        string XmlCommentsFilePath
         {
             get
             {
-                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var basePath = WebHostEnvironment.ContentRootPath;
                 var fileName = typeof( Startup ).GetTypeInfo().Assembly.GetName().Name + ".xml";
                 return Path.Combine( basePath, fileName );
             }

@@ -1,6 +1,7 @@
 using System;
 using HDWallet.Core;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HDWallet.Avalanche.Tests
 {
@@ -14,12 +15,12 @@ namespace HDWallet.Avalanche.Tests
             var account0 = avaxHDWallet.GetAccount(0);
             AvalancheWallet wallet0 = account0.GetExternalWallet(0);
 
-            Assert.AreEqual("6f5139852a78fdb4bd790a46fbb34a98cabb1a946a724917efa94a2a41d82d7d", wallet0.PrivateKey.ToHex());
-            Assert.AreEqual("X-avax1as0rhx4ejjfm3vzmhxycs58v4lu4u9h7amfqmx",wallet0.Address );
+            ClassicAssert.AreEqual("6f5139852a78fdb4bd790a46fbb34a98cabb1a946a724917efa94a2a41d82d7d", wallet0.PrivateKey.ToHex());
+            ClassicAssert.AreEqual("X-avax1as0rhx4ejjfm3vzmhxycs58v4lu4u9h7amfqmx",wallet0.Address );
 
             var avalancheWallet = new AvalancheWallet("6f5139852a78fdb4bd790a46fbb34a98cabb1a946a724917efa94a2a41d82d7d");
-            Assert.AreEqual(wallet0.PrivateKey.ToHex(), avalancheWallet.PrivateKey.ToHex());
-            Assert.AreEqual(wallet0.Address, avalancheWallet.Address);
+            ClassicAssert.AreEqual(wallet0.PrivateKey.ToHex(), avalancheWallet.PrivateKey.ToHex());
+            ClassicAssert.AreEqual(wallet0.Address, avalancheWallet.Address);
 
             var account = avaxHDWallet.GetAccount(0);
             Console.WriteLine("Address list;");
@@ -34,7 +35,7 @@ namespace HDWallet.Avalanche.Tests
         public void ShouldGenerateWalletForMainnet()
         {
             var avalancheWallet = new AvalancheWallet("6f5139852a78fdb4bd790a46fbb34a98cabb1a946a724917efa94a2a41d82d7d");
-            Assert.AreEqual("X-avax1as0rhx4ejjfm3vzmhxycs58v4lu4u9h7amfqmx", avalancheWallet.GetAddress(Networks.Mainnet, Chain.X));
+            ClassicAssert.AreEqual("X-avax1as0rhx4ejjfm3vzmhxycs58v4lu4u9h7amfqmx", avalancheWallet.GetAddress(Networks.Mainnet, Chain.X));
         }
 
         [Test]
@@ -44,8 +45,8 @@ namespace HDWallet.Avalanche.Tests
             var account0 = avaxHDWallet.GetAccount(0);
             AvalancheWallet wallet0 = account0.GetExternalWallet(0);
 
-            Assert.AreEqual("6f5139852a78fdb4bd790a46fbb34a98cabb1a946a724917efa94a2a41d82d7d", wallet0.PrivateKey.ToHex());
-            Assert.AreEqual("X-fuji1as0rhx4ejjfm3vzmhxycs58v4lu4u9h73fdlhe",wallet0.GetAddress(Networks.Fuji, Chain.X) );
+            ClassicAssert.AreEqual("6f5139852a78fdb4bd790a46fbb34a98cabb1a946a724917efa94a2a41d82d7d", wallet0.PrivateKey.ToHex());
+            ClassicAssert.AreEqual("X-fuji1as0rhx4ejjfm3vzmhxycs58v4lu4u9h73fdlhe",wallet0.GetAddress(Networks.Fuji, Chain.X) );
 
             var account = avaxHDWallet.GetAccount(0);
             Console.WriteLine("Address list;");
@@ -61,7 +62,7 @@ namespace HDWallet.Avalanche.Tests
         public void ShouldGenerateWalletFromPrivateKey()
         {
             var avalancheWallet = new AvalancheWallet("6f5139852a78fdb4bd790a46fbb34a98cabb1a946a724917efa94a2a41d82d7d");
-            Assert.AreEqual("X-fuji1as0rhx4ejjfm3vzmhxycs58v4lu4u9h73fdlhe", avalancheWallet.GetAddress(Networks.Fuji));
+            ClassicAssert.AreEqual("X-fuji1as0rhx4ejjfm3vzmhxycs58v4lu4u9h73fdlhe", avalancheWallet.GetAddress(Networks.Fuji));
         }
     }
 }

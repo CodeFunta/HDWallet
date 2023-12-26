@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <PackageReference Include="SimpleBase" Version="2.1.0" />   
-    <PackageReference Include="SharpHash" Version="1.1.0" /> 
+    <PackageReference Include="SimpleBase" Version="4.0.0" />   
+    <PackageReference Include="SharpHash" Version="1.2.0" /> 
   </ItemGroup>
 
   <PropertyGroup>

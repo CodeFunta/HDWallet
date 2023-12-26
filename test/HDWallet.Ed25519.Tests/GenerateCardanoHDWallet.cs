@@ -1,6 +1,7 @@
 using HDWallet.Core;
 using HDWallet.Ed25519.Sample;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HDWallet.Ed25519.Tests
 {
@@ -25,21 +26,21 @@ namespace HDWallet.Ed25519.Tests
             TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(ReferenceSeed);
             var wallet = hdWallet.GetWalletFromPath(path);
 
-            Assert.AreEqual(ReferencePrivateKey, wallet.PrivateKeyBytes.ToHexString());
-            Assert.AreEqual(ReferencePubKey, $"00{wallet.PublicKeyBytes.ToHexString()}");
+            ClassicAssert.AreEqual(ReferencePrivateKey, wallet.PrivateKeyBytes.ToHexString());
+            ClassicAssert.AreEqual(ReferencePubKey, $"00{wallet.PublicKeyBytes.ToHexString()}");
         }
         
         [Test]
         public void ShouldGenerateFromMnemonic()
         {
             IHDWallet<CardanoSampleWallet> hdWallet = new CardanoHDWalletEd25519(mnemonic, string.Empty);
-            Assert.AreEqual(ReferenceSeed, ((CardanoHDWalletEd25519)hdWallet).BIP39Seed);
+            ClassicAssert.AreEqual(ReferenceSeed, ((CardanoHDWalletEd25519)hdWallet).BIP39Seed);
 
             // m/1852'/1815'
             CardanoSampleWallet wallet = hdWallet.GetMasterWallet();
 
-            Assert.AreEqual(ReferencePrivateKey, wallet.PrivateKeyBytes.ToHexString());
-            Assert.AreEqual(ReferencePubKey, $"00{wallet.PublicKeyBytes.ToHexString()}");
+            ClassicAssert.AreEqual(ReferencePrivateKey, wallet.PrivateKeyBytes.ToHexString());
+            ClassicAssert.AreEqual(ReferencePubKey, $"00{wallet.PublicKeyBytes.ToHexString()}");
         }
 
 
@@ -55,8 +56,8 @@ namespace HDWallet.Ed25519.Tests
             string pubKey = $"00{wallet.PublicKeyBytes.ToHexString()}";
             string privKey = wallet.PrivateKeyBytes.ToHexString();
 
-            Assert.AreEqual(expectedPrivateKey, privKey);
-            Assert.AreEqual(expectedPublicKey, pubKey);
+            ClassicAssert.AreEqual(expectedPrivateKey, privKey);
+            ClassicAssert.AreEqual(expectedPublicKey, pubKey);
         }
 
         [TestCase(0, 0, "b0bc08374eb66b563347bc2e8e2555c0368c96f31c63d1aefe25022c422d6376", "00cb4bc10e4aefcbf3abfa89e3d7d05af4b2c4bb5b72d21900d72235f9ac47a237")]
@@ -71,8 +72,8 @@ namespace HDWallet.Ed25519.Tests
             string pubKey = $"00{wallet.PublicKeyBytes.ToHexString()}";
             string privKey = wallet.PrivateKeyBytes.ToHexString();
 
-            Assert.AreEqual(expectedPrivateKey, privKey);
-            Assert.AreEqual(expectedPublicKey, pubKey);
+            ClassicAssert.AreEqual(expectedPrivateKey, privKey);
+            ClassicAssert.AreEqual(expectedPublicKey, pubKey);
         }
     }
 }

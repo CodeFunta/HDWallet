@@ -1,5 +1,6 @@
 using NBitcoin;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HDWallet.Core.Tests
 {
@@ -16,7 +17,7 @@ namespace HDWallet.Core.Tests
         public void ShouldCreateFromMnemonic()
         {
             var wallet = new SampleWallet("push wrong tribe amazing again cousin hill belt silent found sketch monitor", "");
-            Assert.AreEqual("3d977063d3e2ee074f8d6806d1fb73d1b3884d29ab032aa1c7121cfddb0467a99330647652bbe6a244074bccaed63dc08a67286dc1fbf1b8aa36e8aa7bfce909", wallet.BIP39Seed);
+            ClassicAssert.AreEqual("3d977063d3e2ee074f8d6806d1fb73d1b3884d29ab032aa1c7121cfddb0467a99330647652bbe6a244074bccaed63dc08a67286dc1fbf1b8aa36e8aa7bfce909", wallet.BIP39Seed);
         }
 
         // English test vectors : https://github.com/trezor/python-mnemonic/blob/master/vectors.json
@@ -31,21 +32,21 @@ namespace HDWallet.Core.Tests
         public void ShouldCreateFromMnemonic(string mneumonic, string seed, string passphrase = "TREZOR")
         {
             var wallet = new SampleWallet(mneumonic, passphrase);
-            Assert.AreEqual(seed, wallet.BIP39Seed);
+            ClassicAssert.AreEqual(seed, wallet.BIP39Seed);
         }
 
         [Test]
         public void ShouldCreateFromMnemonicAndPassword()
         {
             var wallet = new SampleWallet("push wrong tribe amazing again cousin hill belt silent found sketch monitor", "passphrase");
-            Assert.AreEqual("256a23851bd21dbf38c1d38d69ec386eaf402c01fc76ce72de69df093c8e8fbf1caf3f77e09bd76e725020309d57f0ea4c71ecee69b548fe34249305172ded82", wallet.BIP39Seed);
+            ClassicAssert.AreEqual("256a23851bd21dbf38c1d38d69ec386eaf402c01fc76ce72de69df093c8e8fbf1caf3f77e09bd76e725020309d57f0ea4c71ecee69b548fe34249305172ded82", wallet.BIP39Seed);
         }
 
         [Test]
         public void ShouldCreateFromSeed()
         {
             var wallet = new SampleWallet("3d977063d3e2ee074f8d6806d1fb73d1b3884d29ab032aa1c7121cfddb0467a99330647652bbe6a244074bccaed63dc08a67286dc1fbf1b8aa36e8aa7bfce909");
-            Assert.AreEqual("3d977063d3e2ee074f8d6806d1fb73d1b3884d29ab032aa1c7121cfddb0467a99330647652bbe6a244074bccaed63dc08a67286dc1fbf1b8aa36e8aa7bfce909", wallet.BIP39Seed);
+            ClassicAssert.AreEqual("3d977063d3e2ee074f8d6806d1fb73d1b3884d29ab032aa1c7121cfddb0467a99330647652bbe6a244074bccaed63dc08a67286dc1fbf1b8aa36e8aa7bfce909", wallet.BIP39Seed);
         }
 
         [Test]
@@ -56,35 +57,35 @@ namespace HDWallet.Core.Tests
 
             // mnemonic -> seed (hex)
             string seed = mnemonic.DeriveSeed().ToHexString();
-            Assert.AreEqual("3d977063d3e2ee074f8d6806d1fb73d1b3884d29ab032aa1c7121cfddb0467a99330647652bbe6a244074bccaed63dc08a67286dc1fbf1b8aa36e8aa7bfce909", seed);
+            ClassicAssert.AreEqual("3d977063d3e2ee074f8d6806d1fb73d1b3884d29ab032aa1c7121cfddb0467a99330647652bbe6a244074bccaed63dc08a67286dc1fbf1b8aa36e8aa7bfce909", seed);
 
             // Seed (hex) -> Xprv
             ExtKey extKey = ExtKey.CreateFromSeed(seed.FromHexToByteArray());
             BitcoinExtKey bitcoinExtKey = extKey.GetWif(Network.Main);
             string wif = bitcoinExtKey.ToWif();
-            Assert.AreEqual("xprv9s21ZrQH143K36zpCxiwo4sgScCQm3fef6K8ajZiJ7wseezmwAi6sKhEuWexTKt7CNp1z2KKsMTJhZXrhEKVYbpEHrB9DnsTp31YcWtA1k3", wif);
+            ClassicAssert.AreEqual("xprv9s21ZrQH143K36zpCxiwo4sgScCQm3fef6K8ajZiJ7wseezmwAi6sKhEuWexTKt7CNp1z2KKsMTJhZXrhEKVYbpEHrB9DnsTp31YcWtA1k3", wif);
 
             // string (xprv...) -> BitcoinExtKey Xprv
             BitcoinExtKey bitcoinExtKeyParsed = new BitcoinExtKey(wif, Network.Main);
             var parsedWif = bitcoinExtKeyParsed.ToWif();
-            Assert.AreEqual("xprv9s21ZrQH143K36zpCxiwo4sgScCQm3fef6K8ajZiJ7wseezmwAi6sKhEuWexTKt7CNp1z2KKsMTJhZXrhEKVYbpEHrB9DnsTp31YcWtA1k3", parsedWif);
+            ClassicAssert.AreEqual("xprv9s21ZrQH143K36zpCxiwo4sgScCQm3fef6K8ajZiJ7wseezmwAi6sKhEuWexTKt7CNp1z2KKsMTJhZXrhEKVYbpEHrB9DnsTp31YcWtA1k3", parsedWif);
 
             // BitcoinExtKey -> string (xprv...)
             parsedWif = bitcoinExtKeyParsed.ToString();
-            Assert.AreEqual("xprv9s21ZrQH143K36zpCxiwo4sgScCQm3fef6K8ajZiJ7wseezmwAi6sKhEuWexTKt7CNp1z2KKsMTJhZXrhEKVYbpEHrB9DnsTp31YcWtA1k3", parsedWif);
+            ClassicAssert.AreEqual("xprv9s21ZrQH143K36zpCxiwo4sgScCQm3fef6K8ajZiJ7wseezmwAi6sKhEuWexTKt7CNp1z2KKsMTJhZXrhEKVYbpEHrB9DnsTp31YcWtA1k3", parsedWif);
 
             // string (xprv...) -> ExtKey Xprv
             ExtKey extKeyParsed = ExtKey.Parse(wif, Network.Main);
             wif = extKeyParsed.GetWif(Network.Main).ToWif();
-            Assert.AreEqual("xprv9s21ZrQH143K36zpCxiwo4sgScCQm3fef6K8ajZiJ7wseezmwAi6sKhEuWexTKt7CNp1z2KKsMTJhZXrhEKVYbpEHrB9DnsTp31YcWtA1k3", wif);
+            ClassicAssert.AreEqual("xprv9s21ZrQH143K36zpCxiwo4sgScCQm3fef6K8ajZiJ7wseezmwAi6sKhEuWexTKt7CNp1z2KKsMTJhZXrhEKVYbpEHrB9DnsTp31YcWtA1k3", wif);
 
             // ExtKey -> string (xprv...)
             var stringHex = extKeyParsed.ToString(Network.Main);
-            Assert.AreEqual("xprv9s21ZrQH143K36zpCxiwo4sgScCQm3fef6K8ajZiJ7wseezmwAi6sKhEuWexTKt7CNp1z2KKsMTJhZXrhEKVYbpEHrB9DnsTp31YcWtA1k3", stringHex);
+            ClassicAssert.AreEqual("xprv9s21ZrQH143K36zpCxiwo4sgScCQm3fef6K8ajZiJ7wseezmwAi6sKhEuWexTKt7CNp1z2KKsMTJhZXrhEKVYbpEHrB9DnsTp31YcWtA1k3", stringHex);
 
             ExtKey extKey1 = ExtKey.CreateFromSeed("3d977063d3e2ee074f8d6806d1fb73d1b3884d29ab032aa1c7121cfddb0467a99330647652bbe6a244074bccaed63dc08a67286dc1fbf1b8aa36e8aa7bfce909".FromHexToByteArray());
             ExtKey extKey2 = ExtKey.Parse("xprv9s21ZrQH143K36zpCxiwo4sgScCQm3fef6K8ajZiJ7wseezmwAi6sKhEuWexTKt7CNp1z2KKsMTJhZXrhEKVYbpEHrB9DnsTp31YcWtA1k3", Network.Main);
-            Assert.AreEqual(extKey1.PrivateKey, extKey2.PrivateKey);
+            ClassicAssert.AreEqual(extKey1.PrivateKey, extKey2.PrivateKey);
         }
     }
 }

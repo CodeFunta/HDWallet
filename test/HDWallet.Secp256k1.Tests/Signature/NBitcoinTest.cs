@@ -3,6 +3,8 @@ using NBitcoin;
 using NBitcoin.Crypto;
 using NBitcoin.DataEncoders;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
 
 namespace Test
 {
@@ -39,7 +41,7 @@ namespace Test
             var signatureWithHdWallet = Encoders.Hex.EncodeData(Sign(messageHash)); 
             var signatureWithHdWallet1 = Encoders.Hex.EncodeData(Sign1(messageHash));
 
-            Assert.AreEqual(signatureWithHdWallet, signatureWithHdWallet1);
+            ClassicAssert.AreEqual(signatureWithHdWallet, signatureWithHdWallet1);
         }     
 
         [TestCase("b80553c039bb8bac7414673b7eb5d9f6bb931572afb0618e141bc87b3906000e", "304402205483a10f49d4116b9aa82b72cb70ff975f13e6303d658510c1285be3c68a691202202451e97f55c7b004feccffa61242f1c02b0e65b76f95732aa31a00dd3c0dc2b2")]
@@ -54,7 +56,7 @@ namespace Test
         {
             var messageHash = Encoders.Hex.DecodeData(message);
             var signatureWithHdWallet = Encoders.Hex.EncodeData(Sign1(messageHash));
-            Assert.AreEqual(signature, signatureWithHdWallet);
+            ClassicAssert.AreEqual(signature, signatureWithHdWallet);
         }
     }
 }

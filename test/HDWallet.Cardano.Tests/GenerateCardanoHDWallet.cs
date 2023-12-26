@@ -1,5 +1,6 @@
 using HDWallet.Core;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HDWallet.Cardano.Tests
 {
@@ -17,12 +18,12 @@ namespace HDWallet.Cardano.Tests
         public void ShouldGenerateFromMnemonic()
         {
             IHDWallet<CardanoWallet> hdWallet = new CardanoHDWallet(mnemonic, string.Empty);
-            Assert.AreEqual(ReferenceSeed, ((CardanoHDWallet)hdWallet).BIP39Seed);
+            ClassicAssert.AreEqual(ReferenceSeed, ((CardanoHDWallet)hdWallet).BIP39Seed);
 
             CardanoWallet wallet = hdWallet.GetMasterWallet();
 
-            Assert.AreEqual(ReferencePrivateKey, wallet.PrivateKeyBytes.ToHexString());
-            Assert.AreEqual(ReferencePubKey, $"00{wallet.PublicKeyBytes.ToHexString()}");
+            ClassicAssert.AreEqual(ReferencePrivateKey, wallet.PrivateKeyBytes.ToHexString());
+            ClassicAssert.AreEqual(ReferencePubKey, $"00{wallet.PublicKeyBytes.ToHexString()}");
         }
 
 
@@ -38,8 +39,8 @@ namespace HDWallet.Cardano.Tests
             string pubKey = $"00{wallet.PublicKeyBytes.ToHexString()}";
             string privKey = wallet.PrivateKeyBytes.ToHexString();
 
-            Assert.AreEqual(expectedPrivateKey, privKey);
-            Assert.AreEqual(expectedPublicKey, pubKey);
+            ClassicAssert.AreEqual(expectedPrivateKey, privKey);
+            ClassicAssert.AreEqual(expectedPublicKey, pubKey);
         }
 
         [TestCase(0, 0, "b0bc08374eb66b563347bc2e8e2555c0368c96f31c63d1aefe25022c422d6376", "00cb4bc10e4aefcbf3abfa89e3d7d05af4b2c4bb5b72d21900d72235f9ac47a237")]
@@ -54,8 +55,8 @@ namespace HDWallet.Cardano.Tests
             string pubKey = $"00{wallet.PublicKeyBytes.ToHexString()}";
             string privKey = wallet.PrivateKeyBytes.ToHexString();
 
-            Assert.AreEqual(expectedPrivateKey, privKey);
-            Assert.AreEqual(expectedPublicKey, pubKey);
+            ClassicAssert.AreEqual(expectedPrivateKey, privKey);
+            ClassicAssert.AreEqual(expectedPublicKey, pubKey);
         }
     }
 }

@@ -5,6 +5,7 @@ using Extensions.Data;
 using HDWallet.Core;
 using HDWallet.Ed25519.Sample;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HDWallet.Ed25519.Tests
 {

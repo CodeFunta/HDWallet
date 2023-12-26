@@ -2,6 +2,7 @@ using System;
 using HDWallet.Core;
 using HDWallet.Bitcoin;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using HDWallet.Secp256k1;
 
 namespace HDWallet.Cardano.Tests
@@ -11,7 +12,7 @@ namespace HDWallet.Cardano.Tests
         public void ShouldGenerateFromPrivateKey<TWallet>(string privateKey, string expectedPublicKeyHex) where TWallet : Wallet
         {
             Wallet wallet = (Wallet)Activator.CreateInstance(typeof(TWallet), new object[] { privateKey });
-            Assert.AreEqual(expectedPublicKeyHex, wallet.PublicKey.ToBytes().ToHexString());
+            ClassicAssert.AreEqual(expectedPublicKeyHex, wallet.PublicKey.ToBytes().ToHexString());
         }
     }
 

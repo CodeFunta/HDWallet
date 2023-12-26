@@ -1,6 +1,7 @@
 using HDWallet.Core;
 using HDWallet.Ed25519.Sample;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace HDWallet.Ed25519.Tests
 {
@@ -20,8 +21,8 @@ namespace HDWallet.Ed25519.Tests
             TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(ReferenceSeed);
             var account0 = hdWallet.GetWalletFromPath(path);
 
-            Assert.AreEqual(privateKey, account0.PrivateKeyBytes.ToHexString());
-            Assert.AreEqual(publicKey, $"00{account0.PublicKeyBytes.ToHexString()}");
+            ClassicAssert.AreEqual(privateKey, account0.PrivateKeyBytes.ToHexString());
+            ClassicAssert.AreEqual(publicKey, $"00{account0.PublicKeyBytes.ToHexString()}");
         }
 
         private const string ReferenceSeed2 = "fffcf9f6f3f0edeae7e4e1dedbd8d5d2cfccc9c6c3c0bdbab7b4b1aeaba8a5a29f9c999693908d8a8784817e7b7875726f6c696663605d5a5754514e4b484542";
@@ -38,8 +39,8 @@ namespace HDWallet.Ed25519.Tests
             TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(ReferenceSeed2);
             var account0 = hdWallet.GetWalletFromPath(path);
 
-            Assert.AreEqual(privateKey, account0.PrivateKeyBytes.ToHexString());
-            Assert.AreEqual(publicKey, $"00{account0.PublicKeyBytes.ToHexString()}");
+            ClassicAssert.AreEqual(privateKey, account0.PrivateKeyBytes.ToHexString());
+            ClassicAssert.AreEqual(publicKey, $"00{account0.PublicKeyBytes.ToHexString()}");
         }
 
         [TestCase("m/44'/1852'", "762843f584c04573608a9b11a5ef4d4a4ef9864c6374044920f5d90b463d94e8", "00bab81ed6a545a7e8ece6ee5601b2e50be8943f3daaf988a145a99a3d0da27d30")]
@@ -48,8 +49,8 @@ namespace HDWallet.Ed25519.Tests
             TestHDWalletEd25519 hdWallet = new TestHDWalletEd25519(ReferenceSeed2);
             var wallet = hdWallet.GetWalletFromPath(path);
 
-            Assert.AreEqual(privateKey, wallet.PrivateKeyBytes.ToHexString());
-            Assert.AreEqual(publicKey, $"00{wallet.PublicKeyBytes.ToHexString()}");
+            ClassicAssert.AreEqual(privateKey, wallet.PrivateKeyBytes.ToHexString());
+            ClassicAssert.AreEqual(publicKey, $"00{wallet.PublicKeyBytes.ToHexString()}");
         }
     }
 }

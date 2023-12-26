@@ -1,5 +1,7 @@
 using HDWallet.Core;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
 
 namespace HDWallet.Tezos.Tests
 {
@@ -13,7 +15,7 @@ namespace HDWallet.Tezos.Tests
             var account0wallet0 = wallet.GetAccount(0).GetExternalWallet(0); // m/44'/1729'/0'/0/0
 
             var publicKey = account0wallet0.PublicKey.ToHex();
-            Assert.AreEqual("024790e31fd295d2ed7eee9b77da60403cc96a8088a0cb120509c3c8999ea4cd8b", publicKey);
+            ClassicAssert.AreEqual("024790e31fd295d2ed7eee9b77da60403cc96a8088a0cb120509c3c8999ea4cd8b", publicKey);
         }
     }
 }

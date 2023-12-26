@@ -1,6 +1,8 @@
 using System;
 using HDWallet.Core;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
 
 namespace HDWallet.Solana.Tests
 {
@@ -16,7 +18,7 @@ namespace HDWallet.Solana.Tests
         {
             var privateKey = "f5e5767cf153319517630f226876b86c8160cc583bc013744c6bf255f5cc0ee5";
             SolanaWallet wallet = new SolanaWallet(privateKey);
-            Assert.AreEqual(expected: "3fD58whN2KJaN9T4r5uE3ELFmzRW1dQNuszrmC6gnhx1", actual: wallet.Address);
+            ClassicAssert.AreEqual(expected: "3fD58whN2KJaN9T4r5uE3ELFmzRW1dQNuszrmC6gnhx1", actual: wallet.Address);
 
             Console.WriteLine(wallet.Address);
             Console.WriteLine(wallet.PublicKeyBytes.ToHexString());
@@ -30,7 +32,7 @@ namespace HDWallet.Solana.Tests
         public void ShouldGenerateFromBytes(string address, byte[] privateKeyBytes)
         {
             SolanaWallet wallet = new SolanaWallet(privateKeyBytes);
-            Assert.AreEqual(expected: address, actual: wallet.Address);
+            ClassicAssert.AreEqual(expected: address, actual: wallet.Address);
         }
 
         [Test]
@@ -38,7 +40,7 @@ namespace HDWallet.Solana.Tests
         {
             var pubkey = "278117fc144c72340f67d0f2316e8386ceffbf2b2428c9c51fef7c597f1d426e";
             var actualAddress = SimpleBase.Base58.Bitcoin.Encode(pubkey.FromHexToByteArray());
-            Assert.AreEqual("3fD58whN2KJaN9T4r5uE3ELFmzRW1dQNuszrmC6gnhx1", actualAddress);
+            ClassicAssert.AreEqual("3fD58whN2KJaN9T4r5uE3ELFmzRW1dQNuszrmC6gnhx1", actualAddress);
         }
 
         [Test]

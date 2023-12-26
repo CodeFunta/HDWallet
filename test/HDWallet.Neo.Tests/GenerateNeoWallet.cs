@@ -1,6 +1,8 @@
 using HDWallet.Core;
 using Neo.Cryptography.ECC;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
 using System;
 
 namespace HDWallet.Neo.Tests
@@ -20,9 +22,9 @@ namespace HDWallet.Neo.Tests
             var address = wallet.GetAddress();
             var defaultAddress = wallet.Address;
 
-            Assert.AreEqual("NLToPSKMAMqPBrz38zXAkVrwrB5FFZXyue", address);
-            Assert.AreEqual("NLToPSKMAMqPBrz38zXAkVrwrB5FFZXyue", defaultAddress);
-            Assert.AreEqual("0201e390b04e24bac115c2172ad9f3a7e9abfc1d87e99f3aa74bd5da0839ec080a", wallet.PublicKey.ToString());
+            ClassicAssert.AreEqual("NLToPSKMAMqPBrz38zXAkVrwrB5FFZXyue", address);
+            ClassicAssert.AreEqual("NLToPSKMAMqPBrz38zXAkVrwrB5FFZXyue", defaultAddress);
+            ClassicAssert.AreEqual("0201e390b04e24bac115c2172ad9f3a7e9abfc1d87e99f3aa74bd5da0839ec080a", wallet.PublicKey.ToString());
         }
 
         [Test]
@@ -33,9 +35,9 @@ namespace HDWallet.Neo.Tests
 
             var wallet = hdWallet.GetAccount(0).GetExternalWallet(0);
 
-            Assert.AreEqual("0bff59a04f762ede6ca9a02b9e0d550574e57e979ee3d7c9d44d432ab77eaa6c", wallet.PrivateKeyBytes.ToHexString());
-            Assert.AreEqual("035ae04176940923a8dee307f8d5f65139095b6d5d30c3063363a044a399e1a226", wallet.PublicKey.ToString());
-            Assert.AreEqual("NdpXh2dae7KfZNFqYjrALCyhDshJtThmNN", wallet.Address);
+            ClassicAssert.AreEqual("0bff59a04f762ede6ca9a02b9e0d550574e57e979ee3d7c9d44d432ab77eaa6c", wallet.PrivateKeyBytes.ToHexString());
+            ClassicAssert.AreEqual("035ae04176940923a8dee307f8d5f65139095b6d5d30c3063363a044a399e1a226", wallet.PublicKey.ToString());
+            ClassicAssert.AreEqual("NdpXh2dae7KfZNFqYjrALCyhDshJtThmNN", wallet.Address);
         }
 
         [Test]
@@ -44,7 +46,7 @@ namespace HDWallet.Neo.Tests
             var accountExtendedPrivateKey = "xprv9ygCPYxKvwkSoQvKtcsfc4AYx7YBMWqkSZ8u7yAD1Ydz9muWdjNgZN6vdg1QBPZ9rYZdKbhPnmseYmHbJCSqkuxPJUzPHc5i6PQto4gvz6M";
             IAccount<NeoWallet> accountHDWallet = NeoHdWallet.GetAccountFromMasterKey(accountExtendedPrivateKey);
             var depositWallet0 = accountHDWallet.GetExternalWallet(0);
-            Assert.AreEqual("NeWuyvtyLL2WUSZpW9zHrAe6AwUCPxmS1R", depositWallet0.Address);
+            ClassicAssert.AreEqual("NeWuyvtyLL2WUSZpW9zHrAe6AwUCPxmS1R", depositWallet0.Address);
         }
     }
 }

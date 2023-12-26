@@ -1,6 +1,8 @@
 using HDWallet.Core;
 using HDWallet.Secp256k1;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
 
 namespace HDWallet.Tron.Tests
 {
@@ -17,8 +19,8 @@ namespace HDWallet.Tron.Tests
             IPublicAccount<TronPublicWallet> tronPublicWallet = new PublicAccount<TronPublicWallet>(xpub, NBitcoin.Network.Main);
             IPublicWallet depositPublicWallet0 = tronPublicWallet.GetExternalPublicWallet(0);
 
-            Assert.AreEqual("TMQ3RtdjwCCoeA2RAYiTrFNZTKtzh5t9YQ", depositPublicWallet0.Address);
-            Assert.AreEqual(depositWallet0.Address, depositPublicWallet0.Address);
+            ClassicAssert.AreEqual("TMQ3RtdjwCCoeA2RAYiTrFNZTKtzh5t9YQ", depositPublicWallet0.Address);
+            ClassicAssert.AreEqual(depositWallet0.Address, depositPublicWallet0.Address);
         }
 
         [Test]
@@ -29,7 +31,7 @@ namespace HDWallet.Tron.Tests
             IPublicAccount<TronPublicWallet> tronPublicWallet = new PublicAccount<TronPublicWallet>(xpub, NBitcoin.Network.Main);
 
             IPublicWallet depositWallet0 = tronPublicWallet.GetExternalPublicWallet(0);
-            Assert.AreEqual("TMQ3RtdjwCCoeA2RAYiTrFNZTKtzh5t9YQ", depositWallet0.Address);
+            ClassicAssert.AreEqual("TMQ3RtdjwCCoeA2RAYiTrFNZTKtzh5t9YQ", depositWallet0.Address);
         }
     }
 }

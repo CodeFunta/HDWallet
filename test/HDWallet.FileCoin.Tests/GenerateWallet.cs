@@ -3,6 +3,8 @@ using HDWallet.Core;
 using HDWallet.Secp256k1;
 using NBitcoin;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
 
 namespace HDWallet.FileCoin.Tests
 {
@@ -29,7 +31,7 @@ namespace HDWallet.FileCoin.Tests
             var priv = "3074e388727396185b22a9615ddee4368c40be3ea10db8449cdfca405633f801";
 
             Wallet wallet = new FileCoinWallet(priv);
-            Assert.AreEqual("f16xffbfk6zhpdeeogrjucbn4degf5bs6tyw7vzqq", wallet.Address);
+            ClassicAssert.AreEqual("f16xffbfk6zhpdeeogrjucbn4degf5bs6tyw7vzqq", wallet.Address);
         }
 
         [Test]
@@ -37,8 +39,8 @@ namespace HDWallet.FileCoin.Tests
         {
             var wallet = new FileCoinWallet("3074e388727396185b22a9615ddee4368c40be3ea10db8449cdfca405633f801");
             var testNetAddress = wallet.GetAddress(Network.Testnet);
-            Assert.AreEqual("f16xffbfk6zhpdeeogrjucbn4degf5bs6tyw7vzqq", wallet.Address);
-            Assert.AreEqual("t16xffbfk6zhpdeeogrjucbn4degf5bs6tyw7vzqq", testNetAddress);
+            ClassicAssert.AreEqual("f16xffbfk6zhpdeeogrjucbn4degf5bs6tyw7vzqq", wallet.Address);
+            ClassicAssert.AreEqual("t16xffbfk6zhpdeeogrjucbn4degf5bs6tyw7vzqq", testNetAddress);
         }
 
         [Test]
@@ -47,11 +49,11 @@ namespace HDWallet.FileCoin.Tests
             IHDWallet<FileCoinWallet> avaxHDWallet = new FileCoinHDWallet("wire sort once settle balcony bright awkward pottery derive noodle absorb combine quick account cluster dash material yard people layer fold royal add learn", "");
             var account0 = avaxHDWallet.GetAccount(0);
             FileCoinWallet wallet0 = account0.GetExternalWallet(0);
-            Assert.AreEqual("f1gdrlcunry4lagktmexhudtfxmndtlm7wijcu35a", wallet0.Address);
-            Assert.AreEqual("t1gdrlcunry4lagktmexhudtfxmndtlm7wijcu35a", wallet0.GetAddress(Network.Testnet));
+            ClassicAssert.AreEqual("f1gdrlcunry4lagktmexhudtfxmndtlm7wijcu35a", wallet0.Address);
+            ClassicAssert.AreEqual("t1gdrlcunry4lagktmexhudtfxmndtlm7wijcu35a", wallet0.GetAddress(Network.Testnet));
             
             FileCoinWallet wallet1 = account0.GetExternalWallet(1);
-            Assert.AreEqual("f1fer5pooes55ght6k2msg2iqdj5yzunwvtos7zsq", wallet1.Address);
+            ClassicAssert.AreEqual("f1fer5pooes55ght6k2msg2iqdj5yzunwvtos7zsq", wallet1.Address);
         }
 
         [Test]
@@ -62,13 +64,13 @@ namespace HDWallet.FileCoin.Tests
             Wallet wallet = new FileCoinWallet(priv);
             var pubKeyDecomp = wallet.PublicKey.Decompress();
 
-            Assert.AreEqual(
+            ClassicAssert.AreEqual(
                 expected: "04e2c906303ddcc8a52c6e9e42c5c83c1e43fc4ca3e15357ae85478adbc029cacdddf97830cf46720d41e04ab4592b7db219fda58f289e1df170d34fd174672cc3",
                 actual: pubKeyDecomp.ToHex()
             );
 
             var pubKey = new PubKey(wallet.PublicKey.ToBytes());
-            Assert.AreEqual(
+            ClassicAssert.AreEqual(
                 expected: "04e2c906303ddcc8a52c6e9e42c5c83c1e43fc4ca3e15357ae85478adbc029cacdddf97830cf46720d41e04ab4592b7db219fda58f289e1df170d34fd174672cc3",
                 actual: pubKey.Decompress().ToHex()
             );
@@ -91,12 +93,12 @@ namespace HDWallet.FileCoin.Tests
             // MHTjiHJzlhhbIqlhXd7kNoxAvj6hDbhEnN/KQFYz+AE=
             var priv = "3074e388727396185b22a9615ddee4368c40be3ea10db8449cdfca405633f801";
             FileCoinWallet wallet = new FileCoinWallet(priv);
-            Assert.AreEqual("f16xffbfk6zhpdeeogrjucbn4degf5bs6tyw7vzqq", wallet.GetAddress());
+            ClassicAssert.AreEqual("f16xffbfk6zhpdeeogrjucbn4degf5bs6tyw7vzqq", wallet.GetAddress());
 
             // 6ECPCno3PrdpMbm6bRUtaTs7BW5vvp1EHPbleBlp0sI=
             priv = "e8408f0a7a373eb76931b9ba6d152d693b3b056e6fbe9d441cf6e5781969d2c2";
             wallet = new FileCoinWallet(priv);
-            Assert.AreEqual("f1ku6kt26cl5uco6xo2f3bmorax54z4a3quwe66vy", wallet.GetAddress());
+            ClassicAssert.AreEqual("f1ku6kt26cl5uco6xo2f3bmorax54z4a3quwe66vy", wallet.GetAddress());
         }
     }
 }

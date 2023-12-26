@@ -1,4 +1,5 @@
 ﻿using System;
+using Asp.Versioning;
 using HDWallet.Api.V1.Models;
 using HDWallet.Bitcoin;
 using Microsoft.AspNetCore.Mvc;

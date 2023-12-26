@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using NBitcoin.DataEncoders;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using PeterO.Cbor;
 
 namespace HDWallet.Cardano.Tests
@@ -58,7 +59,7 @@ namespace HDWallet.Cardano.Tests
                 .Add(crc); 
             
             var encodedAddress = Encoders.Base58.EncodeData(byronAddress.EncodeToBytes());
-            Assert.AreEqual("37btjrVyb4KEB2STADSsj3MYSAdj52X5FrFWpw2r7Wmj2GDzXjFRsHWuZqrw7zSkwopv8Ci3VWeg6bisU9dgJxW5hb2MZYeduNKbQJrqz3zVBsu9nT", encodedAddress);
+            ClassicAssert.AreEqual("37btjrVyb4KEB2STADSsj3MYSAdj52X5FrFWpw2r7Wmj2GDzXjFRsHWuZqrw7zSkwopv8Ci3VWeg6bisU9dgJxW5hb2MZYeduNKbQJrqz3zVBsu9nT", encodedAddress);
         }
     }
 
