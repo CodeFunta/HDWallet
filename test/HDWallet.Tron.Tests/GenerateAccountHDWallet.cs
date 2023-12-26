@@ -30,7 +30,7 @@ namespace HDWallet.Tron.Tests
         }
 
         [Test]
-        public void ShouldCreateAddrssFeomMasterKey()
+        public void ShouldCreateAddressFromMasterKey()
         {
             var accountExtendedPrivateKey = "xprv9yB7gYqxZdR4AUGppodn1XL7RpJkRUnDE1fM6oEY4LQrvstH1qCdfFHmW9msdqAsPEPqr9LhYmw2nZQfk8uBbk1KYhzjNVzWdwsugTTgNvc";
             IAccount<TronWallet> account = new Account<TronWallet>(accountExtendedPrivateKey, NBitcoin.Network.Main);
